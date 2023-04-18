@@ -16,3 +16,5 @@ public class HelloWorld { //class - podstawowy "kontener naszego kodu"
 		// ("") = wszystko co w nawiasie jest argumentem metody print
 	} // blok kodu
 }
+
+// cośtam
