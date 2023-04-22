@@ -5,23 +5,28 @@ public class Task1 {
     public static void main(String[] args) {
 
         Random number = new Random();
+// obtain number between 0-9
         int x = number.nextInt(10);
         int y = number.nextInt(10);
+
+        System.out.println("x = " + x + " , y = " + y);
+
         boolean result = x > y;
+        System.out.println("Czy x jest większe od y ? " + result);
 
-        System.out.println("Is X greater than Y ?");
-        System.out.println(x + " > " + y + " " + result);
+        int xMultipliedBy2 = x * 2;
+        result = xMultipliedBy2 > y;
 
-        x = x * 2;
-        boolean result1 = x > y;
-        System.out.println("Is X multiplied by 2 is greater than Y ?");
-        System.out.println(x + " > " + y + " " + result1);
+        System.out.println("x * 2 = " + xMultipliedBy2 + " , y = " + y);
+        System.out.println("Czy x jest większe od y ? " + result);
 
-        boolean result2 = y < (x+3) && (x+3) > x - 2;
-        System.out.println("Is Y smaller than sum x+3 and also greater than x minus 2 ?");
-        System.out.println("The y is: " + y + ", and the x is " + x);
-        System.out.println(result2);
+        result = y < (x + 3) && (x + 3) > (x - 2);
+        System.out.println("y < (x + 3) && (x + 3) > (x - 2) " + result);
 
+        int multiply = x * y;
+        int modulo = multiply % 2;
+        result = modulo == 0;
+        System.out.println("Czy x * y jest parzyste ? " + result);
 
     }
 }
