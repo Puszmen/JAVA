@@ -1,25 +1,18 @@
-public class Library {
+class Library {
     public static void main(String[] args) {
-        final String appName = "Library v0.2";
+        final String appName = "Library v0.3";
 
-        Book book1 = new Book();
-        book1.title = "Lord of The Rings";
-        book1.author = "J.R.R. Tolkien";
-        book1.relaseDate = 1955;
-        book1.pages = 1500;
-        book1.publisher = "Peter";
-        book1.isbn = "326598784512";
+        Book book1 = new Book("Lord of The Rings","J.R.R. Tolkien",1995,1500,
+                "Peter","326-59-8784-512-0");
+        Book book2 = new Book("Milczenie owiec","Thomas Harris",2015,432,
+                "Andre","978-83-7985-693-0");
+        Book book3 = new Book("Żywot Nunczako","Mariano Italiano",2018,100,
+                "Pietraszek","123-12-3214-152-0");
 
         System.out.println(appName);
         System.out.println("Książki dostępne w bibliotece");
-        System.out.println(book1.title);
-        System.out.println(book1.author);
-        System.out.println(book1.relaseDate);
-        System.out.println(book1.pages);
-        System.out.println(book1.publisher);
-        System.out.println(book1.isbn);
-
-
-
+        book1.printInfo();
+        book2.printInfo();
+        book3.printInfo();
     }
 }
