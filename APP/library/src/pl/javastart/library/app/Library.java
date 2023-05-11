@@ -1,6 +1,10 @@
+package pl.javastart.library.app;
+
+import pl.javastart.library.model.Book;
+
 class Library {
     public static void main(String[] args) {
-        final String appName = "Library v0.4";
+        final String appName = "pl.javastart.library.app.Library v0.5";
 
         Book book1 = new Book("Lord of The Rings","J.R.R. Tolkien",1995,1500,
                 "Peter","326-59-8784-512-0");
