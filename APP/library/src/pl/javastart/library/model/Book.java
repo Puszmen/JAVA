@@ -3,19 +3,19 @@ package pl.javastart.library.model;
 public class Book {
     private String title;
     private String author;
-    private int relaseDate;
+    private int releaseDate;
     private int pages;
     private String publisher;
     private String isbn;
 
-    public Book(String title, String author, int relaseDate, int pages, String publisher, String isbn) {
-        this(title,author,relaseDate,pages,publisher);
+    public Book(String title, String author, int releaseDate, int pages, String publisher, String isbn) {
+        this(title,author,releaseDate,pages,publisher);
         this.isbn = isbn;
     }
-    public Book (String title, String author, int relaseDate, int pages, String publisher) {
+    public Book (String title, String author, int releaseDate, int pages, String publisher) {
         this.title = title;
         this.author = author;
-        this.relaseDate = relaseDate;
+        this.releaseDate = releaseDate;
         this.pages = pages;
         this.publisher = publisher;
     }
@@ -36,12 +36,12 @@ public class Book {
         this.author = author;
     }
 
-    public int getRelaseDate() {
-        return relaseDate;
+    public int getReleaseDate() {
+        return releaseDate;
     }
 
-    public void setRelaseDate(int relaseDate) {
-        this.relaseDate = relaseDate;
+    public void setReleaseDate(int releaseDate) {
+        this.releaseDate = releaseDate;
     }
 
     public int getPages() {
@@ -69,7 +69,10 @@ public class Book {
     }
 
     public void printInfo() {
-        String info = title+", "+author+", "+relaseDate+", "+pages+", "+publisher+", "+isbn;
+        String info = title + "; " + author + "; " + releaseDate + "; " + pages + "; " + publisher;
+        if (isbn != null) {
+            info = info + "; "+isbn;
+        }
         System.out.println(info);
     }
 }

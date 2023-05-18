@@ -4,7 +4,7 @@ import pl.javastart.library.model.Book;
 
 class Library {
     public static void main(String[] args) {
-        final String appName = "Biblioteka v0.5";
+        final String appName = "Biblioteka v0.6";
 
         Book book1 = new Book("Lord of The Rings","J.R.R. Tolkien",1995,1500,
                 "Peter","326-59-8784-512-0");
