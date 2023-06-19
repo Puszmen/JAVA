@@ -8,7 +8,11 @@ public class CheckSum {
 
         Scanner scanner = new Scanner(System.in);
 
-        for (next = scanner.nextInt(); next <= 100; next = scanner.nextInt() ) {
+//        for (next = scanner.nextInt(); next <= 100; next = scanner.nextInt() ) {
+//            sum += next;
+//        }
+
+        while ((next = scanner.nextInt()) <= 100) {
             sum += next;
         }
 
