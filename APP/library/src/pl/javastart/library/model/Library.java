@@ -6,47 +6,27 @@ public class Library {
     private int publicationsNumber = 0;
     private Publication[] publications = new Publication[MAX_PUBLICATIONS];
 
+    public Publication[] getPublications() {
+        Publication[] result = new Publication[publicationsNumber];
+        for (int i = 0; i < result.length; i++) {
+            result[i] = publications[i];
+        }
+        return result;
+    }
 
     public void addBook (Book book) {
-        if (publicationsNumber < MAX_PUBLICATIONS) {
-            publications[publicationsNumber] = book;
-            publicationsNumber++;
-        } else {
-            System.out.println("Osiągnięto maksymalną liczbę książek w bibliotece");
-        }
-    }
-    public void printBooks() {
-        int countBooks = 0;
-        for (int i = 0; i < publicationsNumber; i++) {
-            if (publications[i] instanceof Book) {
-                System.out.println(publications[i]);
-                countBooks++;
-            }
-        }
-        if (countBooks == 0) {
-            System.out.println("Brak książek w bibliotece");
-        }
+        addPublication(book);
     }
 
     public void addMagazine (Magazine magazine) {
-        if (publicationsNumber < MAX_PUBLICATIONS) {
-            publications[publicationsNumber] = magazine;
-            publicationsNumber++;
-        } else {
-            System.out.println("Osiągnięto maksymalną liczbę magazynów w bibliotece");
-        }
+        addPublication(magazine);
     }
 
-    public void printMagazines() {
-        int countMagazines = 0;
-        for (int i = 0; i < publicationsNumber; i++) {
-            if (publications[i] instanceof Magazine) {
-                System.out.println(publications[i]);
-                countMagazines++;
-            }
+    public void addPublication (Publication publication) {
+        if (publicationsNumber >= MAX_PUBLICATIONS) {
+            throw new ArrayIndexOutOfBoundsException("MAX publications exceeded " + MAX_PUBLICATIONS);
         }
-        if (countMagazines == 0) {
-            System.out.println("Brak magazynów w bibliotece");
+        publications[publicationsNumber] = publication;
+        publicationsNumber++;
         }
     }
-}
