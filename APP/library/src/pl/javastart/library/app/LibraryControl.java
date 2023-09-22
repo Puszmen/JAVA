@@ -53,6 +53,12 @@ public class LibraryControl {
                 case PRINT_MAGAZINES:
                     printMagazines();
                     break;
+                case DELETE_BOOKS:
+                    deleteBook();
+                    break;
+                case DELETE_MAGAZINES:
+                    deleteMagazine();
+                    break;
                 case EXIT:
                     exit();
                     break;
@@ -94,6 +100,18 @@ public class LibraryControl {
         }
     }
 
+    private void deleteMagazine() {
+        try {
+            Magazine magazine = dataReader.readAndCreateMagazine();
+            if (library.removePublication(magazine))
+                printer.printLine("usunięto magazyn z biblioteki");
+            else
+                printer.printLine("brak wskazanego magazynu");
+        } catch (InputMismatchException e) {
+            printer.printLine("nie udało się dodać magazynu, niepoprawne dane");
+        }
+    }
+
     private void exit() {
         try {
             fileManager.exportData(library);
@@ -121,6 +139,18 @@ public class LibraryControl {
         }
     }
 
+    private void deleteBook() {
+        try {
+            Book book = dataReader.readAndCreateBook();
+            if (library.removePublication(book))
+                printer.printLine("usunięto książkę z biblioteki");
+            else
+                printer.printLine("brak wskazanej książki");
+        } catch (InputMismatchException e) {
+            printer.printLine("nie udało się dodać książki, niepoprawne dane");
+        }
+    }
+
     private void printOptions() {
         printer.printLine("Wybierz opcję:");
         for (Option option : Option.values()) {
@@ -129,12 +159,13 @@ public class LibraryControl {
     }
 
     private enum Option {
-
         EXIT(0, "wyjście z programu"),
         ADD_BOOKS(1, "dodaj książkę"),
         ADD_MAGAZINES(2, "dodaj magazyn"),
         PRINT_BOOKS(3, "wyświetl dostępne książki"),
-        PRINT_MAGAZINES(4, "wyświetl dostępne magazyny");
+        PRINT_MAGAZINES(4, "wyświetl dostępne magazyny"),
+        DELETE_BOOKS (5, "usuń książkę"),
+        DELETE_MAGAZINES (6, "usuń magazyn");
 
         private final int value;
         private final String description;
