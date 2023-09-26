@@ -8,4 +8,3 @@ public class LibraryApp {
         libraryControl.controlLoop();
     }
 }
-git 
