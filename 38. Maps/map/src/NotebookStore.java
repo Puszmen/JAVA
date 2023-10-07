@@ -18,7 +18,7 @@ public class NotebookStore {
         for (Map.Entry<Notebook, Integer> entry : entries) {
             System.out.println(entry.getKey() + ": " + entry.getValue());
         }
-        
+
 //        notebooks.put("B590", new Notebook("Lenovo", "B590"));
 //        notebooks.put("Inspiron0211A", new Notebook("Dell", "Inspiron0211A"));
 //        notebooks.put("G2A33EA", new Notebook("HP", "G2A33EA"));
