@@ -4,8 +4,8 @@ import java.util.*;
 
 public class ProductImporter {
 
-    static Map<String, Set<Product>> readProduct(String fileName) throws FileNotFoundException {
-        Map<String, Set<Product>> productsMap = new HashMap<>();
+    static Map<String, TreeSet<Product>> readFile(String fileName) throws FileNotFoundException {
+        Map<String, TreeSet<Product>> productsMap = new HashMap<>();
         try (Scanner fileReader = new Scanner(new File(fileName))) {
             fileReader.nextLine();
             while (fileReader.hasNextLine()) {
@@ -18,12 +18,13 @@ public class ProductImporter {
         return productsMap;
     }
 
-    private static void insertProductIntoMap(Map<String, Set<Product>> productsMap, String category, Product product) {
-        if (productsMap.containsKey(category)) {
+    private static void insertProductIntoMap(Map<String, TreeSet<Product>> productsMap, String category, Product product) {
+        if (productsMap.containsKey(category))
             productsMap.get(category).add(product);
-        } else {
+        else {
             TreeSet<Product> categorySet = new TreeSet<>();
-            productsMap.put(category,categorySet);
+            categorySet.add(product);
+            productsMap.put(category, categorySet);
         }
     }
 }
