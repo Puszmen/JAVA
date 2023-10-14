@@ -3,19 +3,45 @@ package pl.javastart.library.io.file;
 import pl.javastart.library.exception.DataExportException;
 import pl.javastart.library.exception.DataImportException;
 import pl.javastart.library.exception.InvalidDataException;
-import pl.javastart.library.model.Book;
-import pl.javastart.library.model.Library;
-import pl.javastart.library.model.Magazine;
-import pl.javastart.library.model.Publication;
+import pl.javastart.library.model.*;
 
 import java.io.*;
+import java.util.Collection;
+import java.util.Map;
 import java.util.Scanner;
 
 class CsvFileManager implements FileManager {
     private static final String FILE_NAME = "Library.csv";
+    private static final String USERS_FILE_NAME = "Library_users.csv";
     @Override
     public Library importData() {
         Library library = new Library();
+        importPublications(library);
+        importUsers(library);
+        return library;
+    }
+
+    private void importUsers(Library library) {
+        try (Scanner fileReader = new Scanner(new File(USERS_FILE_NAME))) {
+            while (fileReader.hasNextLine()) {
+                String line = fileReader.nextLine();
+                LibraryUser libUser = createUserFromString(line);
+                library.addUser(libUser);
+            }
+        } catch (FileNotFoundException e) {
+            throw new DataImportException("Brak pliku " + USERS_FILE_NAME);
+        }
+    }
+
+    private LibraryUser createUserFromString(String csvText) {
+        String[] split = csvText.split(";");
+        String firstName = split[0];
+        String lastName = split[1];
+        String pesel = split[2];
+        return new LibraryUser(firstName,lastName,pesel);
+    }
+
+    private void importPublications(Library library) {
         try (Scanner fileReader = new Scanner(new File(FILE_NAME))) {
             while (fileReader.hasNextLine()) {
                 String line = fileReader.nextLine();
@@ -25,10 +51,8 @@ class CsvFileManager implements FileManager {
         } catch (FileNotFoundException e) {
             throw new DataImportException("Brak pliku " + FILE_NAME);
         }
-        return library;
     }
 
-    // Książka;Władca Pierścieni Drużyna Pierścienia;MUZA;2012;J.R.R. Tolkien;349;150100900
     private Publication createObjectToString(String line) {
         String[] split = line.split(";");
         String type = split[0];
@@ -61,11 +85,32 @@ class CsvFileManager implements FileManager {
 
     @Override
     public void exportData(Library library) {
-        Publication[] publications = library.getPublications();
+        exportPublications(library);
+        exportUsers(library);
+
+    }
+
+    private void exportUsers(Library library) {
+        Collection<LibraryUser> users = library.getUsers().values();
+        try(
+                var fileWriter = new FileWriter(USERS_FILE_NAME);
+                var bufferedWriter = new BufferedWriter(fileWriter);
+        ) {
+            for (LibraryUser libraryUser : users) {
+                bufferedWriter.write(libraryUser.toCsv());
+                bufferedWriter.newLine();
+            }
+        } catch (IOException e) {
+            throw new DataExportException("Błąd zapisu danych do pliku " + USERS_FILE_NAME);
+        }
+    }
+
+    private void exportPublications(Library library) {
+        Collection<Publication> publications = library.getPublications().values();
         try(
                 var fileWriter = new FileWriter(FILE_NAME);
                 var bufferedWriter = new BufferedWriter(fileWriter);
-           ) {
+        ) {
             for (Publication publication : publications) {
                 bufferedWriter.write(publication.toCsv());
                 bufferedWriter.newLine();
