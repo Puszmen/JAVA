@@ -11,19 +11,19 @@ public class contentPaneController {
     private Button clearButton;
 
     @FXML
-    private TextArea inputTextArea;
-
-    @FXML
-    private TextArea outputTextArea;
+//    private TextArea inputTextArea;
+//
+//    @FXML
+//    private TextArea outputTextArea;
 
     public void initialize() {
-        inputTextArea.addEventFilter(KeyEvent.KEY_RELEASED, keyEvent -> reverseTextArea(inputTextArea, outputTextArea));
-        outputTextArea.addEventFilter(KeyEvent.KEY_RELEASED, keyEvent -> reverseTextArea(outputTextArea, inputTextArea));
-
-        clearButton.setOnAction(actionEvent -> {
-            inputTextArea.clear();
-            outputTextArea.clear();
-        });
+//        inputTextArea.addEventFilter(KeyEvent.KEY_RELEASED, keyEvent -> reverseTextArea(inputTextArea, outputTextArea));
+//        outputTextArea.addEventFilter(KeyEvent.KEY_RELEASED, keyEvent -> reverseTextArea(outputTextArea, inputTextArea));
+//
+//        clearButton.setOnAction(actionEvent -> {
+//            inputTextArea.clear();
+//            outputTextArea.clear();
+//        });
     }
     private void reverseTextArea (TextArea source, TextArea target) {
         target.setText(new StringBuilder(source.getText()).reverse().toString());
