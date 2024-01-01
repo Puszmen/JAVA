@@ -1,7 +1,8 @@
 <?import javafx.scene.layout.HBox?>
 
 <?import javafx.scene.control.TextArea?>
-<HBox xmlns="http://javafx.com/javafx/20" xmlns:fx="http://javafx.com/fxml/1">
+<HBox xmlns="http://javafx.com/javafx/20" xmlns:fx="http://javafx.com/fxml/1"
+fx:controller="pl.javastart.test.controller.TextPaneController">
     <children>
         <TextArea fx:id="inputTextArea" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
         <TextArea fx:id="outputTextArea" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
