@@ -24,8 +24,17 @@ public class ControlPaneController {
     private Slider volumeSlider;
 
     public void initialize() {
+        System.out.println("Control Pane Controller created");
         configureVolume();
         configureButtons();
+        configureSliders();
+    }
+
+    private void configureSliders() {
+        volumeSlider.valueProperty().addListener((observableValue, oldValue, newValue) ->
+                System.out.println("Zmiana głośności: " + newValue.doubleValue()));
+        progressSlider.valueProperty().addListener((observableValue, oldValue, newValue) ->
+                System.out.println("Przesunięcie piosenki"));
     }
 
     private void configureButtons() {
