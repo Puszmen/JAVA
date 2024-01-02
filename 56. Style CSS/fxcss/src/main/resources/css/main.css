@@ -18,6 +18,6 @@
     -fx-background-color: #eeec53;
 }
 
-#clearButton {
+#clearButton:hover {
     -fx-background-color: #fc0303;
 }
