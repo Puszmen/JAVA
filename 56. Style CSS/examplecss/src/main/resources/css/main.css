@@ -1,0 +1,19 @@
+. mainTextArea {
+    -fx-font-family: "Comic Sans MS";
+    -fx-font-style: italic;
+    -fx-font-size: 20px;
+    -fx-text-fill: #fc0303;
+}
+
+. clearButton {
+    -fx-background-image: url('../jpg/button-345.png');
+    -fx-background-position: center;
+}
+
+. clearButton:hover {
+    -fx-opacity: 0.3;
+}
+
+.mainTextArea:focused .scroll-pane .viewport .content {
+    -fx-background-color: #c4bbbb;
+}
