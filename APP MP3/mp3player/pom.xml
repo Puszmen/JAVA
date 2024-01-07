@@ -13,6 +13,7 @@
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <javafx.version>21.0.1</javafx.version>
+        <jid3lib.version>0.5.4</jid3lib.version>
     </properties>
 
     <dependencies>
@@ -32,9 +33,14 @@
             <version>${javafx.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-media</artifactId>
+            <version>${javafx.version}</version>
+        </dependency>
+        <dependency>
             <groupId>net.sf.javamusictag</groupId>
             <artifactId>jid3lib</artifactId>
-            <version>0.5.4</version>
+            <version>${jid3lib.version}</version>
         </dependency>
 
     </dependencies>
