@@ -2,14 +2,15 @@ package pl.javastart.mp3player.controller;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Slider;
-import javafx.scene.control.TableView;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.farng.mp3.MP3File;
 import org.farng.mp3.TagException;
+import pl.javastart.mp3player.mp3.Mp3Parser;
 import pl.javastart.mp3player.mp3.Mp3Song;
 import pl.javastart.mp3player.player.Mp3Player;
 
@@ -29,7 +30,7 @@ public class MainController {
         createPlayer();
         configureTableClick();
         configureButtons();
-        addTestMp3();
+        configureMenu();
     }
 
     private void createPlayer() {
@@ -102,28 +103,28 @@ public class MainController {
 
     }
 
-    private void addTestMp3() {
-        ObservableList<Mp3Song> items = contentPaneController.getContentTable().getItems();
-        Mp3Song mp3SongFromPath = createSongFromPath("Kayah - Tańcuj.mp3");
-        items.add(mp3SongFromPath);
-        items.add(mp3SongFromPath);
-        items.add(mp3SongFromPath);
-    }
+    private void configureMenu() {
+        MenuItem openFile = menuPaneController.getFileMenuItem();
+        MenuItem openDir = menuPaneController.getDirMenuItem();
 
-    private Mp3Song createSongFromPath(String filePath) {
-        File file = new File(filePath);
+        openFile.setOnAction(actionEvent -> {
+            FileChooser fc = new FileChooser();
+            fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Mp3", "^*.mp3"));
+            File file = fc.showOpenDialog(new Stage());
             try {
-                MP3File mp3File = new MP3File(file);
-                String absolutePath = file.getAbsolutePath();
-                String title = mp3File.getID3v2Tag().getSongTitle();
-                String author = mp3File.getID3v2Tag().getLeadArtist();
-                String album = mp3File.getID3v2Tag().getAlbumTitle();
-                return new Mp3Song(title, author, album, absolutePath);
-            } catch (IOException | TagException e) {
+                contentPaneController.getContentTable().getItems().add(Mp3Parser.createMp3Song(file));
+            } catch (TagException | IOException e) {
                 e.printStackTrace();
-                return null;
             }
+        });
+        openDir.setOnAction(actionEvent -> {
+            DirectoryChooser dc = new DirectoryChooser();
+            File dir = dc.showDialog(new Stage());
+            try {
+                contentPaneController.getContentTable().getItems().addAll(Mp3Parser.createMp3List(dir));
+            } catch (TagException | IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
-
-
 }
