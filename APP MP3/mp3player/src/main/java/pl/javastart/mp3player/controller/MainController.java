@@ -109,12 +109,13 @@ public class MainController {
 
         openFile.setOnAction(actionEvent -> {
             FileChooser fc = new FileChooser();
-            fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Mp3", "^*.mp3"));
+            fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Mp3", "*.mp3"));
             File file = fc.showOpenDialog(new Stage());
             try {
                 contentPaneController.getContentTable().getItems().add(Mp3Parser.createMp3Song(file));
+                showMessage("Załadowano plik " + file.getName());
             } catch (TagException | IOException e) {
-                e.printStackTrace();
+                showMessage("Nie można otworzyć pliku " + file.getName());
             }
         });
         openDir.setOnAction(actionEvent -> {
@@ -122,9 +123,13 @@ public class MainController {
             File dir = dc.showDialog(new Stage());
             try {
                 contentPaneController.getContentTable().getItems().addAll(Mp3Parser.createMp3List(dir));
+                showMessage("Wczytano dane z folderu " + dir.getName());
             } catch (TagException | IOException e) {
-                e.printStackTrace();
+                showMessage("Wystąpił błąd podczas odczytu folderu");
             }
         });
+    }
+    private void showMessage(String message) {
+        controlPaneController.getMessageTextField().setText(message);
     }
 }
